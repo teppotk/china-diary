@@ -1,0 +1,94 @@
+/* China Diary — dynamic reader (modern typography) */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #E9CB9A;
+  --bg-header: #3A2208;
+  --border:    #C4A060;
+  --text:      #2A1F0E;
+  --muted:     #7A6040;
+  --accent:    #8B5A1A;
+  --link:      #5C3A0A;
+  --max-w:     680px;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 16px;
+  line-height: 1.7;
+  padding: 0;
+}
+
+/* Hero + nav */
+.site-frame { max-width: 800px; margin: 0 auto; }
+.hero-img { display: block; width: 100%; height: auto; }
+
+nav { padding: 6px 0 5px; }
+.nav-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 24px; display: flex; gap: 6px; }
+.nav-btn { display: block; width: 156px; height: auto; border: none; image-rendering: pixelated; }
+nav a { line-height: 0; }
+nav a:hover .nav-btn { opacity: 0.8; }
+
+/* All-entries link */
+.all-link { font-family: sans-serif; font-size: 13px; margin: 0 0 8px; }
+.all-link a { color: var(--link); }
+
+/* List indentation fix (CSS reset strips padding) */
+#entry-view ul, #entry-view ol,
+#all-view ul,   #all-view ol   { padding-left: 1.6em; margin-bottom: 1em; }
+#entry-view li, #all-view li   { margin-bottom: 0.2em; }
+#all-view strong { font-style: italic; font-size: 15px; color: var(--accent); }
+#all-view .subhead { margin-top: 1.6em; margin-bottom: 0.2em; }
+#all-view p { margin-bottom: 1em; text-align: justify; }
+
+/* All-posts date header */
+.all-entry-date { font-size: 20px; font-weight: normal; font-style: italic; color: var(--accent); margin-bottom: 12px; }
+
+/* Practical section title images */
+.section-title-img { display: block; width: 466px; max-width: 100%; height: auto; image-rendering: pixelated; margin: 20px 0 10px; }
+
+main { max-width: var(--max-w); margin: 0 auto; padding: 32px 24px; }
+
+/* Entry list */
+#entry-list { list-style: none; }
+#entry-list li { border-bottom: 1px solid var(--border); padding: 10px 0; }
+#entry-list li a { text-decoration: none; color: var(--text); display: flex; gap: 16px; }
+#entry-list li a:hover .entry-title { text-decoration: underline; }
+.entry-date-label { font-family: sans-serif; font-size: 12px; color: var(--muted); min-width: 150px; padding-top: 2px; }
+.entry-title { font-size: 16px; }
+.entry-excerpt { font-size: 13px; color: var(--muted); font-family: sans-serif; line-height: 1.4; margin-top: 3px; }
+
+/* Single entry */
+#entry-view h2 { font-size: 20px; font-weight: normal; font-style: italic; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 20px; }
+#entry-view p  { margin-bottom: 1em; text-align: justify; }
+#entry-view strong { font-style: italic; font-size: 15px; color: var(--accent); }
+#entry-view .subhead { margin-top: 1.6em; margin-bottom: 0.2em; }
+#entry-view hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+/* Entry navigation */
+#entry-nav { display: flex; gap: 6px; align-items: center; margin-top: 32px; padding-top: 12px; border-top: 1px solid var(--border); }
+#entry-nav a { color: var(--link); text-decoration: none; line-height: 0; }
+#entry-nav a:hover { text-decoration: none; }
+#entry-nav a:hover .nav-arrow { opacity: 0.7; }
+.nav-arrow { display: block; width: 76px; height: auto; border: none; image-rendering: pixelated; }
+.nav-arrow-inactive { opacity: 0.2; }
+
+/* Loading */
+#loading { text-align: center; color: var(--muted); font-family: sans-serif; padding: 40px; }
+
+footer { max-width: var(--max-w); margin: 0 auto; padding: 0 24px 12px; }
+.footer-inner { border-top: 1px solid var(--border); padding-top: 12px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.footer-logo { width: 129px; height: auto; image-rendering: pixelated; flex-shrink: 0; }
+.footer-copy { font-family: sans-serif; font-size: 12px; color: var(--muted); text-align: right; }
+
+/* Photo gallery */
+.photo-grid { display: flex; flex-wrap: wrap; gap: 8px; padding: 24px 0; }
+.thumb-link img { width: 90px; height: 68px; object-fit: cover; border: 1px solid var(--border); display: block; transition: opacity 0.15s; }
+.thumb-link img:hover { opacity: 0.75; }
+.photo-wrap { padding: 0 0 20px; text-align: center; }
+.photo-wrap img.photo-full { max-width: 100%; border: 1px solid var(--border); display: block; margin: 0 auto; }
+.photo-caption { font-size: 14px; color: var(--muted); margin-top: 10px; font-style: italic; }
+.photo-number { font-family: sans-serif; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+.photo-page-title { font-size: 18px; font-weight: normal; font-style: italic; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 20px; }

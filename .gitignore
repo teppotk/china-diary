@@ -1,0 +1,11 @@
+.claude/
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+
+# Photos are tracked once in content/; skip generated copies in dist/
+dist/static/photos/full/
+dist/static/photos/thumbnails/
+dist/dynamic/photos/full/
+dist/dynamic/photos/thumbnails/
