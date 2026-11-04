@@ -3,10 +3,30 @@
   "title": "19.03.2001 Maanantai",
   "body_html": "<p class=\"subhead\"><strong>08.30 Koulua vaihteeksi</strong></p>\n<p>Damn, viikonloppu on ohi, pääsemme taas koulun penkille. Kiinan opetus</p>\n<p>alkaa olla jo vähän hankalampaa, mutta läksyjä tekemällä pysyisi kärryillä. =)</p>\n<p class=\"subhead\"><strong>13.30 Opettajamme suvaitsee saapua tietoisuuteemme</strong></p>\n<p>Käymme heittämässä loistavat kasvit ruoat ja huonot kalaruoat vatsalaukkuumme jo niin tutuksi tulleessa korelaisessa ravintolassa. Sen jälkeen pääsemmekin treffaamaan herra Chen:iä (etunimi? sukunimi?) joka on jenkeissäkin opiskellut television schoolin opettajamme. Kysyttäessä kerromme, että emme niinkään ole tehneet video ja televisio juttuja, tosin niitäkin, mutta lähinnä nettiä ja multimediaa. Ukko on avoin kaikille ideoille joten saamme hoidettua itsemme vierailemaan Shanghain TV-torneissa ja saamme jossain vaiheessa kamerat ja rupeamme tekemään koulun TV-studiossa editoinnit. Ajattelemme tehdä hommasta kuitenkin CD-ROMmin jossa on reippaasti videota ja scifi meininkiä. Bladerunner-elokuvan hengessä jos mahdollista. Harmi että emme ole löytäneet sitä vielä mistään VCD-kaupasta. Ei muuta, palaamme asiaan kun jotain on selvinnyt.</p>\n<p class=\"subhead\"><strong>14.00 Ristinollaa nurmikolla</strong></p>\n<p>Pelaamme Ellin sängystään ottamalla päiväpeittäällä korttia yliopiston puiston nurmikentällä. Luksusta on kun kuuma on kuin kuusessa ja aurinko paistaa. Suomessa satanee lunta. Lopetamme ennen kuutta auringon laskiessa ja punaisen Kiinan lipun laskiessa lipputangosta. Kuvaamme puolitangossa olevaa punalippua.</p>\n<ul>\n<li>Tep</li>\n</ul>",
   "photos": [
-    "DSC01404",
-    "MOV01405",
-    "DSC01406",
-    "MOV01407"
+    {
+      "id": "DSC01404",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01404.jpg",
+      "caption": ""
+    },
+    {
+      "id": "MOV01405",
+      "type": "video",
+      "thumb": "highres_thumbnails/MOV01405.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01406",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01406.jpg",
+      "caption": "Suuri ja mahtava lippu."
+    },
+    {
+      "id": "MOV01407",
+      "type": "video",
+      "thumb": "highres_thumbnails/MOV01407.jpg",
+      "caption": ""
+    }
   ],
   "original_url": "https://web.archive.org/web/20011004043640/http://www.kumiankka.org/china/diary.php"
 }

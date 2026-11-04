@@ -3,7 +3,12 @@
   "title": "05.03.2001 Maanantai",
   "body_html": "<p class=\"subhead\"><strong>19.35 Lähtö</strong></p>\n<p>Lähtö was nice mutta surullinen. Tax freen puolella heti olutta ettei suruttaisi liikaa. Kaupoissa vain törkeän kallista (= Suomen hinnat) tavaraa.</p>\n<p>Kentällä nähty samaan vaihtoon tuleva Tepon vanha intti-kaveri \"Nopa\" Nousiainen liittyy seuraan.       </p>\n<p>Mukaan tulee Guido niminen Suomessa vaihdossa oleva italialainen, joka tottelee tästä lähtien myös mm. nimiä Luigi, Speedo, Yani ja Diego.</p>\n<p>Kone uusi Finnairin uusi MD-11, jossa on katossa vähän välein info-näyttöjä, joista tulee paitsi tietoja koneen nopeudesta, korkeudesta ja kuva koneen sijainnista maapallolla myös teattereissakin parhaillaan pyörivä hyvä Meet the Parents (Perhe on pahin) ja joku huono Replacements-niminen jenkkifudis leffa.</p>\n<ul>\n<li>Teppo</li>\n</ul>",
   "photos": [
-    "DSC01233"
+    {
+      "id": "DSC01233",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01233.jpg",
+      "caption": "Helsinki-Vantaa. Lähtöfiiliksiä."
+    }
   ],
   "original_url": "https://web.archive.org/web/20011004043640/http://www.kumiankka.org/china/diary.php"
 }

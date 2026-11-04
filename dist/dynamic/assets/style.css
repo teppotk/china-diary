@@ -96,6 +96,9 @@ video.photo-full { display: block; width: 100%; max-width: 720px; height: auto; 
 .photo-day-title { font-size: 15px; border-bottom: 1px solid var(--border); padding: 18px 0 4px; }
 .photo-day-title a { color: var(--accent); text-decoration: none; }
 .photo-day-count { font-family: sans-serif; font-size: 12px; color: var(--muted); }
+.day-photos { margin-top: 28px; }
+.day-photos-title { font-size: 15px; font-style: italic; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 4px; }
+.day-photos .photo-grid { padding: 10px 0 0; }
 .photo-day .photo-grid { padding: 10px 0 4px; }
 .thumb-link { position: relative; line-height: 0; }
 .thumb-link.is-video::after { content: "▶"; position: absolute; right: 4px; bottom: 4px; font-size: 12px; line-height: 1; color: #fff; text-shadow: 0 0 3px #000; }

@@ -3,6 +3,8 @@
 // Fetches data/*.json at runtime; requires a web server.
 
 const DATA_BASE = 'data/';
+const PHOTO_PAGES = 'photos/';           // photo pages of this package
+const MEDIA_BASE  = 'photos/';    // where the image files live (set by build.py)
 
 let _entries  = null;   // cached entries list
 let _curDate  = null;   // currently viewed entry date
@@ -98,7 +100,7 @@ async function showEntry(date) {
     el('loading').style.display = 'none';
     setTitle(entry.title);
 
-    el('entry-view').innerHTML = `<h2>${esc(entry.title)}</h2>${entry.body_html}`;
+    el('entry-view').innerHTML = `<h2>${esc(entry.title)}</h2>${entry.body_html}${dayPhotos(entry.photos)}`;
     el('entry-view').style.display = 'block';
 
     // Prev / next
@@ -113,6 +115,19 @@ async function showEntry(date) {
   } catch(err) {
     el('loading').textContent = 'Error: ' + err.message;
   }
+}
+
+function dayPhotos(items) {
+  if (!items || !items.length) return '';
+  const vids = items.filter(p => p.type === 'video').length;
+  const label = `${items.length - vids} kuvaa` + (vids ? `, ${vids} videota` : '');
+  const thumbs = items.map(p => {
+    const cap = esc(p.caption || '');
+    return `<a href="${PHOTO_PAGES}${p.id}.html" class="thumb-link${p.type === 'video' ? ' is-video' : ''}">` +
+           `<img src="${MEDIA_BASE}${p.thumb}" loading="lazy" alt="${cap}" title="${cap}"></a>`;
+  }).join('');
+  return `<div class="day-photos"><div class="day-photos-title">Päivän kuvat ` +
+         `<span class="photo-day-count">${label}</span></div><div class="photo-grid">${thumbs}</div></div>`;
 }
 
 function esc(s) {

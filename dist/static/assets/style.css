@@ -90,6 +90,9 @@ video.photo-full { display: block; width: 100%; max-width: 640px; height: auto; 
 .photo-day-title { font-size: 11px; font-weight: bold; border-bottom: 1px solid #C4A87A; padding: 8px 0 2px; }
 .photo-day-title a:link, .photo-day-title a:visited { font-size: 11px; font-weight: bold; }
 .photo-day-count { font-weight: normal; color: #888; }
+.day-photos { padding: 0 20px 8px; }
+.day-photos-title { font-size: 11px; font-weight: bold; border-bottom: 1px solid #C4A87A; padding: 4px 0 2px; }
+.day-photos .photo-grid { padding: 6px 0 4px; }
 .thumb-link { position: relative; line-height: 0; }
 .thumb-link.is-video::after { content: "▶"; position: absolute; right: 3px; bottom: 3px; font-size: 10px; line-height: 1; color: #fff; text-shadow: 0 0 2px #000; }
 .photo-caption { font-size: 10px; color: #555; margin-top: 6px; }

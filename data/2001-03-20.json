@@ -3,72 +3,402 @@
   "title": "20.03.2001 Tiistai",
   "body_html": "<p class=\"subhead\"><strong>10.00 Carrefour</strong></p>\n<p>Hahaa! Menemme bussilla lähimpään Carrefouriin, ilmeisesti ranskalaiseen, ostoskeskukseen. Matkalla kiinalaiset syljeskelevät bussin lattialle ja koitamme ahtautua penkkeihin, joihin tosin jalkamme eivät mahdu vaan ovat edessä istuvat selässä. Vihdoin perillä. Ah. Länsimainen siisteys, tilavuus ja hygieenisyys ovatkin jo unohtuneet täysin, mutta täällä kaikki palaa taas mieleen. Ostamme reppuja, patonkia, FINLANDIA VODKA 4 PULLOA, juustoja ja punaviiniä. This is so cool. Kiinalaiset katsovat meitä ihmeissään kun iso ostoskärrymme on pullollaan tavaraa, joista kyllä oikeasti osa on omia laukkujamme. Digitaalikameroita ei kyllä täältäkään oikein löydy, mutta Carrefoureja on kaupungissa monia, joista jostain löytyy ilmeisesti paljon enemmän elektroniikkaa. Ostamme myös IKEA tyyppisiä vaahtomuovi/kumi/mitälie mattoja, joita voi yhdistellä legopalikoiden tapaan haluamansa muotoisiksi yhdistelmiksi. Niissä on letkeitä dinosaurusten ja merenelävien kuvia.</p>\n<p class=\"subhead\"><strong>14.00 Piknikille vaihteeksi</strong></p>\n<p>Kirjoitamme taululle olevamme taas piknikillä ja siirrymme yilopiston puistoon. Juomme punaviiniä ja syömme patonkia juustolla. Seuraamme liittyy pari business puolen tyttöä tekemään läksyjään ja rakennamme 24:stä maton palasista noin puolen kuutiometrin kuution. Päivän lämpötila on taas jotain +20C luokkaa, tosin onneksi tässä vaiheessa aurinko ei enää ihan niin kauheasti porota. Hyvä meininki taas vaihteeksi. Illalla kiinalaiseen sirkukseen.</p>\n<ul>\n<li>Tep</li>\n</ul>\n<p class=\"subhead\"><strong>18.30 Sirkus massive</strong></p>\n<p>Bussi vie meidät älyttömän suuren hotellimaisen kompleksin sisäpihalle ja olemme ihan hukassa että missä se sirkus teltta on. Mutta sisään mennään kuin teatteriin tai oopperaan, hienoon sisätilaan. Penkit tosin on ilmeisesti peräisin China Easternin lentokoneista. Ainakin niissä lukee niin, ne ovat samannäköisiä ja niiden selkänojassa on lento-ohjelma!</p>\n<p>Enivei, siskuksen esitykset on kyllä tosi hurjia. Enimmäkseen suunnatonta tasapainoa/tasapainottelua vaativia kikkailuita. Kokoajan saa kyllä taputtaa ja ihmetellä.</p>\n<ul>\n<li>Tep</li>\n</ul>\n<p class=\"subhead\"><strong>06.00 Ihmiset hyytyvät</strong></p>\n<p>Elämme jo keskiviikkoaamua. Koijarit ovat juottaneet japanilaisen Rion oikeasti humalaan juottamalla sille kaljaa ja Finlandia paukkuja baarissa. That man is seriosly pissed. \"I'm tired I must go to sleep\" ei auta japsia pääsemään mihinkään, vielä pitkään aikaan, mutta kahvituksen jälkeen lähetämme Nopan hoitamaan Nipponin huoneeseensa ja jäämme itse vielä jatkamaan. Kolmen maissa kotiudumme mutta bileet jatkuvat huoneessa vielä aamu kuuteen. Teppo yritetään pakottaa tunnin päästä alkaviin TaiJi-harjoituksiin, mutta onneksi armo käy oikeudessa ja julma suunnitelma unohdetaan toistaiseksi.</p>\n<ul>\n<li>Tep</li>\n</ul>",
   "photos": [
-    "DSC01408",
-    "DSC01409",
-    "DSC01410",
-    "DSC01411",
-    "DSC01412",
-    "DSC01413",
-    "DSC01414",
-    "DSC01415",
-    "DSC01416",
-    "DSC01417",
-    "DSC01418",
-    "DSC01419",
-    "MOV01420",
-    "DSC01421",
-    "DSC01422",
-    "DSC01423",
-    "DSC01424",
-    "DSC01425",
-    "DSC01426",
-    "DSC01427",
-    "DSC01428",
-    "DSC01429",
-    "DSC01430",
-    "DSC01431",
-    "DSC01432",
-    "DSC01433",
-    "DSC01434",
-    "DSC01435",
-    "DSC01436",
-    "DSC01437",
-    "DSC01438",
-    "DSC01439",
-    "DSC01440",
-    "DSC01441",
-    "DSC01442",
-    "DSC01443",
-    "DSC01444",
-    "DSC01445",
-    "DSC01446",
-    "DSC01447",
-    "DSC01448",
-    "DSC01449",
-    "DSC01450",
-    "DSC01451",
-    "DSC01453",
-    "DSC01455",
-    "DSC01456",
-    "DSC01457",
-    "DSC01458",
-    "DSC01459",
-    "DSC01461",
-    "DSC01463",
-    "DSC01464",
-    "DSC01465",
-    "DSC01466",
-    "DSC01468",
-    "DSC01469",
-    "DSC01470",
-    "DSC01471",
-    "DSC01472",
-    "DSC01473",
-    "DSC01474",
-    "DSC01475",
-    "DSC01476",
-    "DSC01477",
-    "DSC01478"
+    {
+      "id": "DSC01408",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01408.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01409",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01409.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01410",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01410.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01411",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01411.jpg",
+      "caption": "LifestyleHow to do a cube in China."
+    },
+    {
+      "id": "DSC01412",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01412.jpg",
+      "caption": "LifestyleTukka takana, edessä pitkä piknik."
+    },
+    {
+      "id": "DSC01413",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01413.jpg",
+      "caption": "LifestylePiknik Piknik, café Piknik! Kuvassa vasemmalta: Guido, Elli, Ak, Lili, Tep ja cube."
+    },
+    {
+      "id": "DSC01414",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01414.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01415",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01415.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01416",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01416.jpg",
+      "caption": "Shanghai Center Theater - CirkusTytöt huitoo jutuilla."
+    },
+    {
+      "id": "DSC01417",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01417.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01418",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01418.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01419",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01419.jpg",
+      "caption": "Shanghai Center Theater - CirkusMiehet hyppii renkaiden lävitse kuin delfiinit konsanaan."
+    },
+    {
+      "id": "MOV01420",
+      "type": "video",
+      "thumb": "highres_thumbnails/MOV01420.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01421",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01421.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01422",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01422.jpg",
+      "caption": "Shanghai Center Theater - CirkusTyttö taiteilee Diablolla varsin ammattilaismaisesti."
+    },
+    {
+      "id": "DSC01423",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01423.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01424",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01424.jpg",
+      "caption": "Shanghai Center Theater - CirkusNyt niitä on kaksi, siis niitä tyttöjä jotka taiteilee Diablolla varsin ammattilaismaisesti."
+    },
+    {
+      "id": "DSC01425",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01425.jpg",
+      "caption": "Shanghai Center Theater - CirkusMiehen nenän päällä on viuhka ja sen päällä lasi. Aika koijari!"
+    },
+    {
+      "id": "DSC01426",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01426.jpg",
+      "caption": "Shanghai Center Theater - CirkusMiehen otsalohkon alueella on valtaisa rakennelma, joka koostuu juomalaseista ja lasilevyistä sekä yhdestä kyntteliköstä. Aika veikko!"
+    },
+    {
+      "id": "DSC01427",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01427.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01428",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01428.jpg",
+      "caption": "Shanghai Center Theater - Cirkus"
+    },
+    {
+      "id": "DSC01429",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01429.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01430",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01430.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01431",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01431.jpg",
+      "caption": "Shanghai Center Theater - CirkusTytöillä on liikaa lautasia. Pyöritettäessä syntyvä ääni oli veikeä. zirp!"
+    },
+    {
+      "id": "DSC01432",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01432.jpg",
+      "caption": "Shanghai Center Theater - Cirkus"
+    },
+    {
+      "id": "DSC01433",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01433.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01434",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01434.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01435",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01435.jpg",
+      "caption": "Shanghai Center Theater - CirkusUpside-down."
+    },
+    {
+      "id": "DSC01436",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01436.jpg",
+      "caption": "Shanghai Center Theater - Cirkus"
+    },
+    {
+      "id": "DSC01437",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01437.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01438",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01438.jpg",
+      "caption": "Shanghai Center Theater - CirkusKinky tyttö sipsuttaa sateenvarjon reunaa varpaillaan suhteellisen näppärästi. Mutta miksi? Aika velmu!"
+    },
+    {
+      "id": "DSC01439",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01439.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01440",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01440.jpg",
+      "caption": "Shanghai Center Theater - Cirkus"
+    },
+    {
+      "id": "DSC01441",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01441.jpg",
+      "caption": "Shanghai Center Theater - Cirkus"
+    },
+    {
+      "id": "DSC01442",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01442.jpg",
+      "caption": "Shanghai Center Theater - Cirkus"
+    },
+    {
+      "id": "DSC01443",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01443.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01444",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01444.jpg",
+      "caption": "Shanghai Center Theater - CirkusMies heittelee pottaa. Näyttää pahalta, ilmeisesti myös tuntuu. On varmaan tullut osumia treenatessa..."
+    },
+    {
+      "id": "DSC01445",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01445.jpg",
+      "caption": "Shanghai Center Theater - CirkusOllakko vai eikö ollakko vaiko eikö vai... se on potta."
+    },
+    {
+      "id": "DSC01446",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01446.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01447",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01447.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01448",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01448.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01449",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01449.jpg",
+      "caption": "Shanghai Center Theater - CirkusWe are the robots - Harashoo, ro-botti!"
+    },
+    {
+      "id": "DSC01450",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01450.jpg",
+      "caption": "Shanghai Center Theater - CirkusSedät rakensivat ison jutun penkeistä. Se on lohikäärme."
+    },
+    {
+      "id": "DSC01451",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01451.jpg",
+      "caption": "Shanghai Center Theater - CirkusNoin kaksikymmentä penkkiä. Kiinalaisilla on tapana liioitella."
+    },
+    {
+      "id": "DSC01453",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01453.jpg",
+      "caption": "Shanghai Center Theater - CirkusYrmeä setä taikoi vettä housuistaan."
+    },
+    {
+      "id": "DSC01455",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01455.jpg",
+      "caption": "Shanghai Center Theater - CirkusYrmeä setä kiittää vedestä."
+    },
+    {
+      "id": "DSC01456",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01456.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01457",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01457.jpg",
+      "caption": "Shanghai Center Theater - CirkusAkrobaatti-tytöt tekivät \"human sandwicheja\" They have made \"human sandwiches\" out of themselves. Hui."
+    },
+    {
+      "id": "DSC01458",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01458.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01459",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01459.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01461",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01461.jpg",
+      "caption": "Shanghai Center Theater - CirkusChairway to heaven."
+    },
+    {
+      "id": "DSC01463",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01463.jpg",
+      "caption": "Shanghai Center Theater - CirkusPurista perseellä normaalisti."
+    },
+    {
+      "id": "DSC01464",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01464.jpg",
+      "caption": "Shanghai Center Theater - CirkusTytöt kiittää."
+    },
+    {
+      "id": "DSC01465",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01465.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01466",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01466.jpg",
+      "caption": "Shanghai Center Theater - CirkusPutki päällä. Mies venyi kymmenmetriseksi. Sick dude!"
+    },
+    {
+      "id": "DSC01468",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01468.jpg",
+      "caption": "Shanghai Center Theater - Cirkus\"Puff the magic dragon\" savuaa edelleen."
+    },
+    {
+      "id": "DSC01469",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01469.jpg",
+      "caption": "Shanghai Center Theater - Cirkus"
+    },
+    {
+      "id": "DSC01470",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01470.jpg",
+      "caption": "Shanghai Center Theater - CirkusMitä tähän voisi sanoa? Tähän on nyt tultu, eikä tästä enää ole paluuta."
+    },
+    {
+      "id": "DSC01471",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01471.jpg",
+      "caption": "Shanghai Center Theater - CirkusTytöt huitoo jutuilla kun sirkus loppuu."
+    },
+    {
+      "id": "DSC01472",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01472.jpg",
+      "caption": "Shanghai Center Theater - CirkusGrande finale!"
+    },
+    {
+      "id": "DSC01473",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01473.jpg",
+      "caption": "Shanghai Center Theater - CirkusGrande finale 2!"
+    },
+    {
+      "id": "DSC01474",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01474.jpg",
+      "caption": "NanJing Xi Lu with night-visionTM."
+    },
+    {
+      "id": "DSC01475",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01475.jpg",
+      "caption": "NanJing Xi Lu with night-visionTM."
+    },
+    {
+      "id": "DSC01476",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01476.jpg",
+      "caption": "NanJing Xi Lu with night-visionTM."
+    },
+    {
+      "id": "DSC01477",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01477.jpg",
+      "caption": "NanJing Xi Lu with night-visionTM."
+    },
+    {
+      "id": "DSC01478",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01478.jpg",
+      "caption": "NanJing Xi Lu with night-visionTM."
+    }
   ],
   "original_url": "https://web.archive.org/web/20011004043640/http://www.kumiankka.org/china/diary.php"
 }

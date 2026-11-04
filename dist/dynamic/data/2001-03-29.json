@@ -3,21 +3,96 @@
   "title": "29.03.2001 Torstai",
   "body_html": "<p class=\"subhead\"><strong>15.00 Aikainen herätys</strong></p>\n<p>Tai Ji:n jälkeen päästiin jossain vaiheessa nukkumaan, joten heräilemme lekoisasti vasta iltapäivällä. Heti ekana Mäkkiin syömään hullun tulisia kana-wingsejä ja -purilaisia. Ihme ettei moisia saa Suomen Mäkeistä. Ruoan jälkeen päätämme jättää piknikkailun hienosta säästä huolimatta toissijaiseksi ja painelemme Mäkin vieressä olevaan parturiin hiustenpesuun. Tällä kertaa meitä ei ole kuin pieni porukka, joten saamme huomattavasti paremman käsittelyn kun viimeksi. Nytkin shampootetaan tukka mukavasti ja pitkällisesti päänahkaa hieroen, minkä jälkeen saa makoilla hierovassa tuolissa kun hiukset pestään. Sitten Kunnon päänahan ja kasvojen hieronta ja asiallinen selänhierontakin siihen päälle vielä. Olo oli kyllä taas tämän jälkeen kuin uudesti syntynyt. Mutta kyllä täällä osataan ihmisen ruumiista pitää huolta vähän eritavalla kuin lännessä. Sanoin kuvailemattomalla tavalla mielen ja kehon hoitaminen on mukavasti yhteiskunnan osa, kaikkialla läsnä ja myöskin halpaa. </p>\n<p class=\"subhead\"><strong>00.00 Taking it easy</strong></p>\n<p>Mäkin jälkeen maastoudumme huoneeseemme Guidon kanssa internettailemaan, lukemaan ja musisoimaan. Jossain vaiheessa Guido hakee kaikille ruokaa korealaisen Take Awaystä ja pian onkin jo ilta. Täytyypä mennä nukkumaan, että jaksaa huomenna taas koulussa olla ahkerana. =)</p>\n<ul>\n<li>Tep</li>\n</ul>",
   "photos": [
-    "DSC01547",
-    "DSC01548",
-    "DSC01549",
-    "DSC01550",
-    "DSC01551",
-    "DSC01552",
-    "DSC01553",
-    "DSC01554",
-    "DSC01556",
-    "DSC01557",
-    "DSC01558",
-    "DSC01559",
-    "DSC01560",
-    "DSC01562",
-    "DSC01564"
+    {
+      "id": "DSC01547",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01547.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01548",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01548.jpg",
+      "caption": "Teltta @ kampusOtatko Brooke pontikkaa?"
+    },
+    {
+      "id": "DSC01549",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01549.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01550",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01550.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01551",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01551.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01552",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01552.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01553",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01553.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01554",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01554.jpg",
+      "caption": "Teltta @ kampusMiksi?"
+    },
+    {
+      "id": "DSC01556",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01556.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01557",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01557.jpg",
+      "caption": "Tai Ji in the morningTukka hyvin kaikki hyvin"
+    },
+    {
+      "id": "DSC01558",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01558.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01559",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01559.jpg",
+      "caption": "Tai Ji in the morningKurkipotku"
+    },
+    {
+      "id": "DSC01560",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01560.jpg",
+      "caption": "Tai Ji in the morningKurkipotku 2"
+    },
+    {
+      "id": "DSC01562",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01562.jpg",
+      "caption": "Tai Ji in the morningKaik yhes koos"
+    },
+    {
+      "id": "DSC01564",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01564.jpg",
+      "caption": "Huone 430So many beers, so little time"
+    }
   ],
   "original_url": "https://web.archive.org/web/20011004043640/http://www.kumiankka.org/china/diary.php"
 }

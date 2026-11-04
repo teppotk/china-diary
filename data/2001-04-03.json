@@ -3,34 +3,174 @@
   "title": "03.04.2001 Tiistai",
   "body_html": "<p class=\"subhead\"><strong>PU-DONG</strong></p>\n<p>Lähdetään katsomaan vihdoin Pudongia, eli Shanghain myöhemmin rakennettua luksus-pilvenpiirtäjä keskusta, josta löytyy mm. maailman korkeimmalla oleva ravintola 87 kerroksesta. Muuten menee hyvin, mutta emme ikinä tapaa tyttölaumaa, koska nämä eivät tietenkään ymmärrä ottaa puhelimiaan mukaansa. Miten tämä kuullostaa niin tutulta. =)</p>\n<p>Ei siinä muuta. Törkeän makee paikka mutta ei juuri mitään tekemistä kun ketään ei ole missään vaan kaikki on torneissaan töissä. Kadut ovat SAIRAAN avarat, mutta ei ole edes oikein autoja missään. Ehkä menimme väärään paikkaan. Myöhemmihn kuulemme että tytöt ovat käyneet itse Jin Mao buildingissa sisällä, mutta me emme saa mitään aikaiseksi vaan syömme vaan kallista, mutta hyvää juustoleipää jossain damn ravintolassa.</p>",
   "photos": [
-    "DSC01617",
-    "DSC01620",
-    "DSC01621",
-    "DSC01622",
-    "DSC01623",
-    "DSC01626",
-    "DSC01627",
-    "DSC01628",
-    "DSC01629",
-    "DSC01630",
-    "DSC01631",
-    "DSC01632",
-    "DSC01633",
-    "DSC01634",
-    "DSC01635",
-    "DSC01636",
-    "DSC01637",
-    "DSC01638",
-    "DSC01639",
-    "DSC01640",
-    "DSC01641",
-    "DSC01642",
-    "DSC01643",
-    "DSC01644",
-    "DSC01645",
-    "DSC01646",
-    "DSC01647",
-    "DSC01648"
+    {
+      "id": "DSC01617",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01617.jpg",
+      "caption": "KumiankkaHouston, we have a duck!"
+    },
+    {
+      "id": "DSC01620",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01620.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01621",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01621.jpg",
+      "caption": "AsuntolaHome sweet home"
+    },
+    {
+      "id": "DSC01622",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01622.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01623",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01623.jpg",
+      "caption": "AsuntolaVesi tahtoo ulos seinistä"
+    },
+    {
+      "id": "DSC01626",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01626.jpg",
+      "caption": "AsuntolaKattokin tulee niskaamme"
+    },
+    {
+      "id": "DSC01627",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01627.jpg",
+      "caption": "AsuntolaSiirtämällä putkia talon valmistumisen jälkeen saa tätä aikaan"
+    },
+    {
+      "id": "DSC01628",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01628.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01629",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01629.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01630",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01630.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01631",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01631.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01632",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01632.jpg",
+      "caption": "PudongPilvenpiirtävät peilaavat toisiaan"
+    },
+    {
+      "id": "DSC01633",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01633.jpg",
+      "caption": "PudongJin Mao Building"
+    },
+    {
+      "id": "DSC01634",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01634.jpg",
+      "caption": "PudongOriental Pearl Towerin juuri maaltapäin"
+    },
+    {
+      "id": "DSC01635",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01635.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01636",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01636.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01637",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01637.jpg",
+      "caption": "PudongTinttisukkula"
+    },
+    {
+      "id": "DSC01638",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01638.jpg",
+      "caption": "PudongPilvenpiirtäjät on selkeesti vinoonrakennettu"
+    },
+    {
+      "id": "DSC01639",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01639.jpg",
+      "caption": "PudongPojat hengaa kuulisti"
+    },
+    {
+      "id": "DSC01640",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01640.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01641",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01641.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01642",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01642.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01643",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01643.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01644",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01644.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01645",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01645.jpg",
+      "caption": ""
+    },
+    {
+      "id": "DSC01646",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01646.jpg",
+      "caption": "PudongJin Mao läheltä. Ylhäällä näkyy nostokurjet, josta ikkunanpesijät roikkuvat."
+    },
+    {
+      "id": "DSC01647",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01647.jpg",
+      "caption": "NanJing Lu with night-visionTM."
+    },
+    {
+      "id": "DSC01648",
+      "type": "image",
+      "thumb": "highres_thumbnails/DSC01648.jpg",
+      "caption": "NanJing Lu with night-visionTM."
+    }
   ],
   "original_url": "https://web.archive.org/web/20011004043640/http://www.kumiankka.org/china/diary.php"
 }

@@ -89,7 +89,8 @@ def build_data(photos: list[dict]) -> list[dict]:
     by_day: dict = {}
     for p in photos:
         if p.get("date"):
-            by_day.setdefault(p["date"], []).append(p["id"])
+            by_day.setdefault(p["date"], []).append(
+                {k: p[k] for k in ("id", "type", "thumb", "caption") if k in p})
 
     for md_file in sorted(DIARY_DIR.glob("*.md")):
         meta, body = parse_md(md_file)
@@ -283,6 +284,9 @@ video.photo-full { display: block; width: 100%; max-width: 640px; height: auto; 
 .photo-day-title { font-size: 11px; font-weight: bold; border-bottom: 1px solid #C4A87A; padding: 8px 0 2px; }
 .photo-day-title a:link, .photo-day-title a:visited { font-size: 11px; font-weight: bold; }
 .photo-day-count { font-weight: normal; color: #888; }
+.day-photos { padding: 0 20px 8px; }
+.day-photos-title { font-size: 11px; font-weight: bold; border-bottom: 1px solid #C4A87A; padding: 4px 0 2px; }
+.day-photos .photo-grid { padding: 6px 0 4px; }
 .thumb-link { position: relative; line-height: 0; }
 .thumb-link.is-video::after { content: "▶"; position: absolute; right: 3px; bottom: 3px; font-size: 10px; line-height: 1; color: #fff; text-shadow: 0 0 2px #000; }
 .photo-caption { font-size: 10px; color: #555; margin-top: 6px; }
@@ -365,7 +369,8 @@ def build_static_index(entries: list[dict]) -> None:
 
 
 def build_static_entry(entry: dict, body_html: str,
-                        prev_e: dict | None, next_e: dict | None) -> None:
+                        prev_e: dict | None, next_e: dict | None,
+                        day_photos: list[dict] = ()) -> None:
     prev_btn = (f'<a href="{prev_e["filename"]}.html"><img src="assets/gfx/previous-4x.gif" alt="edellinen" class="nav-arrow"></a>'
                 if prev_e else '<img src="assets/gfx/previous-4x.gif" alt="" class="nav-arrow nav-arrow-inactive">')
     next_btn = (f'<a href="{next_e["filename"]}.html"><img src="assets/gfx/next-4x.gif" alt="seuraava" class="nav-arrow"></a>'
@@ -375,6 +380,7 @@ def build_static_entry(entry: dict, body_html: str,
       <div class="entry-date">{htmlmod.escape(entry['title'])}</div>
       <div class="entry-body">{body_html}</div>
     </div>
+    {day_photos_html(list(day_photos), "photos/", "photos/")}
     <div class="entry-nav">
       <span>{prev_btn}</span>
       <span><a href="index.html"><img src="assets/gfx/index_button-4x.gif" alt="kaikki päivät" class="nav-arrow"></a></span>
@@ -384,7 +390,7 @@ def build_static_entry(entry: dict, body_html: str,
           page_shell(entry["title"], content))
 
 
-def build_static_all(entries: list[dict]) -> None:
+def build_static_all(entries: list[dict], by_day: dict) -> None:
     """Generate all.html — all 80 entries expanded on one page."""
     blocks = []
     for entry in entries:
@@ -393,7 +399,8 @@ def build_static_all(entries: list[dict]) -> None:
         blocks.append(f"""<div class="entry-wrap">
       <div class="all-entry-date"><a href="{entry['filename']}.html">{htmlmod.escape(entry['title'])}</a></div>
       <div class="entry-body">{body_html}</div>
-    </div>""")
+    </div>
+    {day_photos_html(by_day.get(entry['filename'], []), "photos/", "photos/")}""")
     sep = '<hr style="border:none;border-top:1px solid #C4A87A;margin:4px 0;">'
     content = sep.join(blocks)
     write(STATIC_DIR / "all.html", page_shell("kaikki merkinnät", content))
@@ -407,15 +414,20 @@ def build_static(entries: list[dict], photos: list[dict]) -> None:
     # Index
     build_static_index(entries)
 
+    by_day: dict = {}
+    for p in photos:
+        if p.get("date"):
+            by_day.setdefault(p["date"], []).append(p)
+
     # Per-entry pages
     for i, entry in enumerate(entries):
         meta, body = parse_md(DIARY_DIR / f"{entry['filename']}.md")
         body_html  = to_html(body)
         prev_e     = entries[i - 1] if i > 0 else None
         next_e     = entries[i + 1] if i < len(entries) - 1 else None
-        build_static_entry(entry, body_html, prev_e, next_e)
+        build_static_entry(entry, body_html, prev_e, next_e, by_day.get(entry["filename"], []))
 
-    build_static_all(entries)
+    build_static_all(entries, by_day)
     print(f"dist/static/  — {len(entries)} entry pages + index + all.html")
 
 
@@ -475,6 +487,20 @@ def photo_grid_by_day(photos: list[dict], base: str, titles: dict, diary_href) -
             head = ""
         out.append(f'<div class="photo-day" id="d{date or "x"}">{head}<div class="photo-grid">{thumbs}</div></div>')
     return "\n".join(out)
+
+
+def day_photos_html(items: list[dict], page_prefix: str, media_prefix: str) -> str:
+    """Thumbnail grid shown under a diary entry. page_prefix/media_prefix point to photos/."""
+    if not items:
+        return ""
+    n_vid = sum(p.get("type") == "video" for p in items)
+    label = f"{len(items) - n_vid} kuvaa" + (f", {n_vid} videota" if n_vid else "")
+    thumbs = "\n".join(
+        thumb_link(p, media_prefix).replace(f'href="{p["id"]}.html"', f'href="{page_prefix}{p["id"]}.html"')
+        for p in items)
+    return (f'<div class="day-photos"><div class="day-photos-title">Päivän kuvat '
+            f'<span class="photo-day-count">{label}</span></div>'
+            f'<div class="photo-grid">{thumbs}</div></div>')
 
 
 def archive_summary(photos: list[dict]) -> str:
@@ -626,6 +652,9 @@ video.photo-full { display: block; width: 100%; max-width: 720px; height: auto; 
 .photo-day-title { font-size: 15px; border-bottom: 1px solid var(--border); padding: 18px 0 4px; }
 .photo-day-title a { color: var(--accent); text-decoration: none; }
 .photo-day-count { font-family: sans-serif; font-size: 12px; color: var(--muted); }
+.day-photos { margin-top: 28px; }
+.day-photos-title { font-size: 15px; font-style: italic; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 4px; }
+.day-photos .photo-grid { padding: 10px 0 0; }
 .photo-day .photo-grid { padding: 10px 0 4px; }
 .thumb-link { position: relative; line-height: 0; }
 .thumb-link.is-video::after { content: "▶"; position: absolute; right: 4px; bottom: 4px; font-size: 12px; line-height: 1; color: #fff; text-shadow: 0 0 3px #000; }
@@ -639,6 +668,8 @@ DYNAMIC_JS = r"""
 // Fetches data/*.json at runtime; requires a web server.
 
 const DATA_BASE = 'data/';
+const PHOTO_PAGES = 'photos/';           // photo pages of this package
+const MEDIA_BASE  = '__MEDIA_BASE__';    // where the image files live (set by build.py)
 
 let _entries  = null;   // cached entries list
 let _curDate  = null;   // currently viewed entry date
@@ -734,7 +765,7 @@ async function showEntry(date) {
     el('loading').style.display = 'none';
     setTitle(entry.title);
 
-    el('entry-view').innerHTML = `<h2>${esc(entry.title)}</h2>${entry.body_html}`;
+    el('entry-view').innerHTML = `<h2>${esc(entry.title)}</h2>${entry.body_html}${dayPhotos(entry.photos)}`;
     el('entry-view').style.display = 'block';
 
     // Prev / next
@@ -749,6 +780,19 @@ async function showEntry(date) {
   } catch(err) {
     el('loading').textContent = 'Error: ' + err.message;
   }
+}
+
+function dayPhotos(items) {
+  if (!items || !items.length) return '';
+  const vids = items.filter(p => p.type === 'video').length;
+  const label = `${items.length - vids} kuvaa` + (vids ? `, ${vids} videota` : '');
+  const thumbs = items.map(p => {
+    const cap = esc(p.caption || '');
+    return `<a href="${PHOTO_PAGES}${p.id}.html" class="thumb-link${p.type === 'video' ? ' is-video' : ''}">` +
+           `<img src="${MEDIA_BASE}${p.thumb}" loading="lazy" alt="${cap}" title="${cap}"></a>`;
+  }).join('');
+  return `<div class="day-photos"><div class="day-photos-title">Päivän kuvat ` +
+         `<span class="photo-day-count">${label}</span></div><div class="photo-grid">${thumbs}</div></div>`;
 }
 
 function esc(s) {
@@ -984,7 +1028,9 @@ def build_dynamic_photos(photos: list[dict], titles: dict, media_base: str = "")
 def build_dynamic(entries: list[dict], photos: list[dict]) -> None:
     write(DYNAMIC_DIR / "index.html",           DYNAMIC_HTML)
     write(DYNAMIC_DIR / "assets" / "style.css", DYNAMIC_CSS)
-    write(DYNAMIC_DIR / "assets" / "app.js",    DYNAMIC_JS)
+    # DYNAMIC_MEDIA_BASE is relative to photos/*.html; app.js runs one level up.
+    js_media = DYNAMIC_MEDIA_BASE[3:] if DYNAMIC_MEDIA_BASE.startswith("../") else "photos/"
+    write(DYNAMIC_DIR / "assets" / "app.js",    DYNAMIC_JS.replace("__MEDIA_BASE__", js_media))
     copy_gfx(DYNAMIC_DIR / "assets")
 
     # Copy data/ into dist/dynamic/data/
