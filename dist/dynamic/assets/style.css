@@ -105,3 +105,25 @@ video.photo-full { display: block; width: 100%; max-width: 720px; height: auto; 
 .photo-caption { font-size: 14px; color: var(--muted); margin-top: 10px; font-style: italic; }
 .photo-number { font-family: sans-serif; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
 .photo-page-title { font-size: 18px; font-weight: normal; font-style: italic; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 20px; }
+
+/* ---- Responsive: tablets and phones ---- */
+img, video { max-width: 100%; }
+#entry-view, #all-view, .photo-caption { overflow-wrap: anywhere; }
+#entry-view table, #all-view table, main table { display: block; max-width: 100%; overflow-x: auto; }
+
+@media (max-width: 760px) {
+  nav a { flex: 1 1 0; min-width: 0; max-width: 156px; }
+  .nav-btn { width: 100%; }
+}
+
+@media (max-width: 600px) {
+  main { padding: 20px 16px; }
+  .nav-inner { padding: 0 16px; }
+  footer { padding: 0 16px 12px; }
+  .footer-inner { flex-wrap: wrap; }
+  #entry-view p, #all-view p { text-align: left; }
+  #entry-list li a { flex-direction: column; gap: 2px; }
+  .entry-date-label { min-width: 0; }
+  .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 6px; }
+  .thumb-link img { width: 100%; height: auto; aspect-ratio: 4 / 3; }
+}

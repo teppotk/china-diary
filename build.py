@@ -56,6 +56,10 @@ def parse_md(path: Path) -> tuple[dict, str]:
     return meta, body.strip()
 
 def to_html(md_text: str) -> str:
+    # The diary has no code: a tab-indented paragraph or a backtick used as an
+    # apostrophe ("don`t") must not turn into <pre>/<code> blocks.
+    md_text = re.sub(r"^[ \t]+(?=\S)(?![-*+] |\d+\. )", "", md_text, flags=re.M)
+    md_text = md_text.replace("`", "\\`")
     MD.reset()
     html = MD.convert(md_text)
     # Tag paragraphs whose only content is bold text — these are sub-headers in the diary
@@ -182,9 +186,20 @@ def copy_photos_to(dest_dir: Path, photos: list[dict]) -> None:
         dst = dest_dir / sub
         if not src.exists():
             continue
-        if dst.exists():
-            shutil.rmtree(dst)
-        shutil.copytree(src, dst)
+        # Incremental sync: ~300 MB of media, so copy only new/changed files
+        dst.mkdir(parents=True, exist_ok=True)
+        wanted = set()
+        for f in src.iterdir():
+            if f.name.startswith("."):
+                continue
+            wanted.add(f.name)
+            t = dst / f.name
+            st = f.stat()
+            if not t.exists() or t.stat().st_size != st.st_size or t.stat().st_mtime < st.st_mtime:
+                shutil.copy2(f, t)
+        for t in dst.iterdir():
+            if t.name not in wanted:
+                t.unlink()
 
 
 # ---------------------------------------------------------------------------
@@ -291,6 +306,52 @@ video.photo-full { display: block; width: 100%; max-width: 640px; height: auto; 
 .thumb-link.is-video::after { content: "▶"; position: absolute; right: 3px; bottom: 3px; font-size: 10px; line-height: 1; color: #fff; text-shadow: 0 0 2px #000; }
 .photo-caption { font-size: 10px; color: #555; margin-top: 6px; }
 .photo-number { font-size: 9px; color: #888; margin-bottom: 4px; }
+
+/* ---- Responsive: tablets and phones (desktop keeps the original 800px layout) ---- */
+img, video { max-width: 100%; }
+.entry-body, .photo-caption, .entry-list td { overflow-wrap: anywhere; }
+.entry-body table { display: block; max-width: 100%; overflow-x: auto; }
+
+@media (max-width: 820px) {
+  body { margin: 0; }
+  .page-wrap, .top-border, .bottom-border { width: auto; max-width: 800px; }
+  .page-wrap { border-left: 0; border-right: 0; }
+  .inner, .nav-inner { width: auto; max-width: 698px; }
+  .nav-inner a { flex: 1 1 0; min-width: 0; max-width: 156px; }
+  .nav-btn { width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .inner { padding: 0; }
+  .nav-inner { padding: 0 12px; }
+  .entry-wrap, .entry-list, .day-selector, .all-link, .entry-nav, .footer,
+  .photo-day, .day-photos, .photo-wrap { padding-left: 12px; padding-right: 12px; }
+  .entry-wrap { max-width: none; }
+
+  /* Readable text: the 2001 design uses 10px Verdana everywhere */
+  a:link, a:visited, a:hover, a:active { font-size: inherit; }
+  .entry-body { font-size: 15px; line-height: 1.6; text-align: left; }
+  .entry-body strong { font-size: 15px; }
+  .entry-date, .all-entry-date { font-size: 18px; }
+  .all-link { font-size: 14px; }
+  .day-selector select { font-size: 16px; max-width: 70%; }
+
+  .entry-list table, .entry-list tbody, .entry-list tr, .entry-list td { display: block; width: auto; }
+  .entry-list tr { border-bottom: 1px solid #C4A87A; padding: 8px 0; }
+  .entry-list td { padding: 0; }
+  .entry-list .date-col { font-size: 15px; white-space: normal; }
+  .entry-list .excerpt-col { font-size: 13px; line-height: 1.4; margin-top: 2px; }
+
+  .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 5px; }
+  .thumb-link img { width: 100%; height: auto; aspect-ratio: 4 / 3; }
+  .photo-day-title, .photo-day-title a:link, .photo-day-title a:visited,
+  .day-photos-title { font-size: 14px; }
+  .photo-caption { font-size: 14px; }
+  .photo-meta, .photo-number { font-size: 12px; }
+
+  .footer { flex-wrap: wrap; }
+  .footer-copy { font-size: 11px; }
+}
 """
 
 def page_shell(title: str, content: str, root: str = "") -> str:
@@ -661,6 +722,28 @@ video.photo-full { display: block; width: 100%; max-width: 720px; height: auto; 
 .photo-caption { font-size: 14px; color: var(--muted); margin-top: 10px; font-style: italic; }
 .photo-number { font-family: sans-serif; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
 .photo-page-title { font-size: 18px; font-weight: normal; font-style: italic; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 20px; }
+
+/* ---- Responsive: tablets and phones ---- */
+img, video { max-width: 100%; }
+#entry-view, #all-view, .photo-caption { overflow-wrap: anywhere; }
+#entry-view table, #all-view table, main table { display: block; max-width: 100%; overflow-x: auto; }
+
+@media (max-width: 760px) {
+  nav a { flex: 1 1 0; min-width: 0; max-width: 156px; }
+  .nav-btn { width: 100%; }
+}
+
+@media (max-width: 600px) {
+  main { padding: 20px 16px; }
+  .nav-inner { padding: 0 16px; }
+  footer { padding: 0 16px 12px; }
+  .footer-inner { flex-wrap: wrap; }
+  #entry-view p, #all-view p { text-align: left; }
+  #entry-list li a { flex-direction: column; gap: 2px; }
+  .entry-date-label { min-width: 0; }
+  .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 6px; }
+  .thumb-link img { width: 100%; height: auto; aspect-ratio: 4 / 3; }
+}
 """
 
 DYNAMIC_JS = r"""

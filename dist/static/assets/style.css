@@ -97,3 +97,49 @@ video.photo-full { display: block; width: 100%; max-width: 640px; height: auto; 
 .thumb-link.is-video::after { content: "▶"; position: absolute; right: 3px; bottom: 3px; font-size: 10px; line-height: 1; color: #fff; text-shadow: 0 0 2px #000; }
 .photo-caption { font-size: 10px; color: #555; margin-top: 6px; }
 .photo-number { font-size: 9px; color: #888; margin-bottom: 4px; }
+
+/* ---- Responsive: tablets and phones (desktop keeps the original 800px layout) ---- */
+img, video { max-width: 100%; }
+.entry-body, .photo-caption, .entry-list td { overflow-wrap: anywhere; }
+.entry-body table { display: block; max-width: 100%; overflow-x: auto; }
+
+@media (max-width: 820px) {
+  body { margin: 0; }
+  .page-wrap, .top-border, .bottom-border { width: auto; max-width: 800px; }
+  .page-wrap { border-left: 0; border-right: 0; }
+  .inner, .nav-inner { width: auto; max-width: 698px; }
+  .nav-inner a { flex: 1 1 0; min-width: 0; max-width: 156px; }
+  .nav-btn { width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .inner { padding: 0; }
+  .nav-inner { padding: 0 12px; }
+  .entry-wrap, .entry-list, .day-selector, .all-link, .entry-nav, .footer,
+  .photo-day, .day-photos, .photo-wrap { padding-left: 12px; padding-right: 12px; }
+  .entry-wrap { max-width: none; }
+
+  /* Readable text: the 2001 design uses 10px Verdana everywhere */
+  a:link, a:visited, a:hover, a:active { font-size: inherit; }
+  .entry-body { font-size: 15px; line-height: 1.6; text-align: left; }
+  .entry-body strong { font-size: 15px; }
+  .entry-date, .all-entry-date { font-size: 18px; }
+  .all-link { font-size: 14px; }
+  .day-selector select { font-size: 16px; max-width: 70%; }
+
+  .entry-list table, .entry-list tbody, .entry-list tr, .entry-list td { display: block; width: auto; }
+  .entry-list tr { border-bottom: 1px solid #C4A87A; padding: 8px 0; }
+  .entry-list td { padding: 0; }
+  .entry-list .date-col { font-size: 15px; white-space: normal; }
+  .entry-list .excerpt-col { font-size: 13px; line-height: 1.4; margin-top: 2px; }
+
+  .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(76px, 1fr)); gap: 5px; }
+  .thumb-link img { width: 100%; height: auto; aspect-ratio: 4 / 3; }
+  .photo-day-title, .photo-day-title a:link, .photo-day-title a:visited,
+  .day-photos-title { font-size: 14px; }
+  .photo-caption { font-size: 14px; }
+  .photo-meta, .photo-number { font-size: 12px; }
+
+  .footer { flex-wrap: wrap; }
+  .footer-copy { font-size: 11px; }
+}
