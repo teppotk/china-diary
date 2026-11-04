@@ -81,6 +81,16 @@ b             { font-family: Verdana, Tahoma, Arial, sans-serif; font-size: 10px
 .thumb-link img { width: 82px; height: 62px; object-fit: cover; border: 1px solid #8B6914; display: block; }
 .thumb-link img:hover { border-color: #482F09; opacity: 0.8; }
 .photo-wrap { padding: 12px 20px 4px; text-align: center; }
-.photo-wrap img.photo-full { max-width: 100%; border: 1px solid #8B6914; display: block; margin: 0 auto; }
+.photo-wrap img.photo-full { max-width: 100%; height: auto; border: 1px solid #8B6914; display: block; margin: 0 auto; }
+.photo-link { line-height: 0; display: block; text-align: center; cursor: pointer; }
+video.photo-full { display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto; border: 1px solid #8B6914; background: #000; }
+.photo-meta { font-size: 9px; color: #888; margin-top: 4px; }
+.photo-day { padding: 0 20px; }
+.photo-day .photo-grid { padding: 4px 0 12px; }
+.photo-day-title { font-size: 11px; font-weight: bold; border-bottom: 1px solid #C4A87A; padding: 8px 0 2px; }
+.photo-day-title a:link, .photo-day-title a:visited { font-size: 11px; font-weight: bold; }
+.photo-day-count { font-weight: normal; color: #888; }
+.thumb-link { position: relative; line-height: 0; }
+.thumb-link.is-video::after { content: "▶"; position: absolute; right: 3px; bottom: 3px; font-size: 10px; line-height: 1; color: #fff; text-shadow: 0 0 2px #000; }
 .photo-caption { font-size: 10px; color: #555; margin-top: 6px; }
 .photo-number { font-size: 9px; color: #888; margin-bottom: 4px; }

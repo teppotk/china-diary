@@ -27,7 +27,7 @@ jobs:
       - name: Build
         run: |
           pip install -r requirements.txt
-          python3 build.py
+          DYNAMIC_MEDIA_BASE="../../photos/" python3 build.py
 
       - name: Assemble site
         # Package 1 (original design) at the site root,

@@ -28,7 +28,15 @@ china-diary/
 │
 ├── content/                  # Source of truth — human-readable, version-controlled
 │   ├── diary/                    # YYYY-MM-DD.md, one file per entry (YAML frontmatter + Markdown body)
-│   └── photos/                   # Downloaded images + per-subpage metadata JSON
+│   └── photos/
+│       ├── media.json                # Source of truth for the photo archive (captions editable here)
+│       ├── highres/                  # Web-ready camera originals: DSC01233.jpg (q75), *.gif, *.mp4 + poster
+│       ├── highres_thumbnails/       # 130px thumbs (2x the 2001 ones)
+│       ├── highres_originals/        # Raw camera files, 1.2 GB — gitignored, Dropbox archive only
+│       ├── full/ + thumbnails/       # 2001 archive versions (640px), kept for reference
+│       └── metadata.json             # 2001 archive list with original captions
+│   # media.json is made by scraper/process_highres.py; it maps camera numbers to the 2001
+│   # captions and assigns each item a diary `date` (camera clock = Finnish winter time, +6h → China).
 │
 ├── build.py                  # Master build script: content/ → data/ + dist/
 │

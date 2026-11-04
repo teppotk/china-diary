@@ -2,7 +2,8 @@
 """
 Build script: content/ → data/ + dist/static/ + dist/dynamic/
 
-Reads:  content/diary/*.md  and  content/photos/metadata.json
+Reads:  content/diary/*.md  and  content/photos/media.json
+        (falls back to the 2001 archive list content/photos/metadata.json)
 Writes:
   data/entries.json          — diary index (date, title, excerpt)
   data/YYYY-MM-DD.json       — per-entry data (body_html, etc.)
@@ -15,7 +16,7 @@ Usage:
     open dist/static/index.html
 """
 
-import re, json, shutil, html as htmlmod
+import os, re, json, shutil, html as htmlmod
 from pathlib import Path
 import markdown as mdlib
 
@@ -26,7 +27,11 @@ import markdown as mdlib
 ROOT              = Path(__file__).parent
 DIARY_DIR         = ROOT / "content" / "diary"
 PHOTOS_DIR        = ROOT / "content" / "photos"
-PHOTOS_META_FILE  = PHOTOS_DIR / "metadata.json"
+PHOTOS_META_FILE  = PHOTOS_DIR / "metadata.json"   # 2001 archive (367 photos), kept for reference
+MEDIA_FILE        = PHOTOS_DIR / "media.json"      # current archive, see scraper/process_highres.py
+# Set DYNAMIC_MEDIA_BASE (e.g. "../../photos/") to let dist/dynamic/ link to the static
+# package's photo files instead of carrying its own copy (used for the GitHub Pages deploy).
+DYNAMIC_MEDIA_BASE = os.environ.get("DYNAMIC_MEDIA_BASE", "")
 PRACTICAL_FILE    = ROOT / "content" / "practical.md"
 DATA_DIR          = ROOT / "data"
 STATIC_DIR        = ROOT / "dist" / "static"
@@ -78,9 +83,13 @@ def fmt_display_date(date_str: str, title: str) -> str:
 # Phase 1 — build data/
 # ---------------------------------------------------------------------------
 
-def build_data() -> list[dict]:
+def build_data(photos: list[dict]) -> list[dict]:
     DATA_DIR.mkdir(exist_ok=True)
     entries = []
+    by_day: dict = {}
+    for p in photos:
+        if p.get("date"):
+            by_day.setdefault(p["date"], []).append(p["id"])
 
     for md_file in sorted(DIARY_DIR.glob("*.md")):
         meta, body = parse_md(md_file)
@@ -100,6 +109,7 @@ def build_data() -> list[dict]:
             "date":         date,
             "title":        title,
             "body_html":    body_html,
+            "photos":       by_day.get(date, []),
             "original_url": meta.get("original_url", ""),
         }
         (DATA_DIR / f"{date}.json").write_text(
@@ -121,7 +131,15 @@ def build_data() -> list[dict]:
         json.dumps(all_data, ensure_ascii=False, indent=2), encoding="utf-8"
     )
 
-    print(f"data/  — {len(entries)} entries")
+    # photos.json — the whole media archive; paths are relative to photos/
+    public = ("id", "type", "file", "thumb", "poster", "date", "taken", "taken_estimated",
+              "caption", "width", "height", "duration", "original")
+    (DATA_DIR / "photos.json").write_text(
+        json.dumps([{k: p[k] for k in public if k in p} for p in photos],
+                   ensure_ascii=False, indent=1), encoding="utf-8"
+    )
+
+    print(f"data/  — {len(entries)} entries, {len(photos)} media items")
     return entries
 
 # ---------------------------------------------------------------------------
@@ -129,8 +147,16 @@ def build_data() -> list[dict]:
 # ---------------------------------------------------------------------------
 
 def load_photos() -> list[dict]:
+    """Media records: {id, type, file, thumb, poster?, date, taken, caption, ...}.
+
+    Paths are relative to content/photos/ (and to photos/ in the built sites)."""
+    if MEDIA_FILE.exists():
+        return json.loads(MEDIA_FILE.read_text(encoding="utf-8"))
     if PHOTOS_META_FILE.exists():
-        return json.loads(PHOTOS_META_FILE.read_text(encoding="utf-8"))
+        return [{"id": Path(p["filename"]).stem, "type": "image",
+                 "file": f"full/{p['filename']}", "thumb": f"thumbnails/{p['filename']}",
+                 "caption": p.get("caption") or "", "date": None}
+                for p in json.loads(PHOTOS_META_FILE.read_text(encoding="utf-8"))]
     return []
 
 
@@ -147,9 +173,10 @@ def copy_gfx(dest_assets: Path) -> None:
             shutil.copy2(f, dst / name)
 
 
-def copy_photos_to(dest_dir: Path) -> None:
-    """Copy thumbnails and full images into dest_dir/thumbnails/ and dest_dir/full/."""
-    for sub in ("thumbnails", "full"):
+def copy_photos_to(dest_dir: Path, photos: list[dict]) -> None:
+    """Copy the photo subfolders the media records point to (highres/, full/, …)."""
+    subs = {p[k].split("/")[0] for p in photos for k in ("file", "thumb", "poster") if p.get(k)}
+    for sub in sorted(subs):
         src = PHOTOS_DIR / sub
         dst = dest_dir / sub
         if not src.exists():
@@ -247,7 +274,17 @@ b             { font-family: Verdana, Tahoma, Arial, sans-serif; font-size: 10px
 .thumb-link img { width: 82px; height: 62px; object-fit: cover; border: 1px solid #8B6914; display: block; }
 .thumb-link img:hover { border-color: #482F09; opacity: 0.8; }
 .photo-wrap { padding: 12px 20px 4px; text-align: center; }
-.photo-wrap img.photo-full { max-width: 100%; border: 1px solid #8B6914; display: block; margin: 0 auto; }
+.photo-wrap img.photo-full { max-width: 100%; height: auto; border: 1px solid #8B6914; display: block; margin: 0 auto; }
+.photo-link { line-height: 0; display: block; text-align: center; cursor: pointer; }
+video.photo-full { display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto; border: 1px solid #8B6914; background: #000; }
+.photo-meta { font-size: 9px; color: #888; margin-top: 4px; }
+.photo-day { padding: 0 20px; }
+.photo-day .photo-grid { padding: 4px 0 12px; }
+.photo-day-title { font-size: 11px; font-weight: bold; border-bottom: 1px solid #C4A87A; padding: 8px 0 2px; }
+.photo-day-title a:link, .photo-day-title a:visited { font-size: 11px; font-weight: bold; }
+.photo-day-count { font-weight: normal; color: #888; }
+.thumb-link { position: relative; line-height: 0; }
+.thumb-link.is-video::after { content: "▶"; position: absolute; right: 3px; bottom: 3px; font-size: 10px; line-height: 1; color: #fff; text-shadow: 0 0 2px #000; }
 .photo-caption { font-size: 10px; color: #555; margin-top: 6px; }
 .photo-number { font-size: 9px; color: #888; margin-bottom: 4px; }
 """
@@ -382,60 +419,106 @@ def build_static(entries: list[dict], photos: list[dict]) -> None:
     print(f"dist/static/  — {len(entries)} entry pages + index + all.html")
 
 
-def build_static_photos(photos: list[dict]) -> None:
-    photos_dir = STATIC_DIR / "photos"
-    copy_photos_to(photos_dir)
+def fmt_taken(p: dict) -> str:
+    """'2001-03-06T08:33' → 'klo 08.33' (prefixed with ~ when estimated)."""
+    t = p.get("taken")
+    if not t:
+        return ""
+    return ("noin " if p.get("taken_estimated") else "") + "klo " + t[11:16].replace(":", ".")
 
-    # Individual photo pages
-    for i, photo in enumerate(photos):
-        fname  = photo["filename"]
-        stem   = Path(fname).stem
-        cap    = htmlmod.escape(photo.get("caption") or "")
+
+def media_tag(p: dict, base: str, next_href: str) -> str:
+    """Big image (click → next) or native <video> for a media record."""
+    cap = htmlmod.escape(p.get("caption") or "")
+    if p.get("type") == "video":
+        return (f'<video class="photo-full photo-video" controls preload="none" playsinline '
+                f'poster="{base}{p["poster"]}"><source src="{base}{p["file"]}" type="video/mp4">'
+                f'<a href="{base}{p["file"]}">Lataa video</a></video>')
+    return (f'<a href="{next_href}" title="seuraava kuva" class="photo-link">'
+            f'<img src="{base}{p["file"]}" class="photo-full" alt="{cap}"></a>')
+
+
+def media_meta(p: dict, base: str, diary_href: str, day_title: str) -> str:
+    """Date/time line under the photo, linking to that day's diary entry."""
+    bits = []
+    if p.get("date"):
+        bits.append(f'<a href="{diary_href}">{htmlmod.escape(day_title or p["date"])}</a>')
+    if fmt_taken(p):
+        bits.append(fmt_taken(p))
+    if p.get("type") == "video" and p.get("duration"):
+        bits.append(f'video {p["duration"]:.0f} s')
+    elif p.get("width"):
+        bits.append(f'<a href="{base}{p["file"]}">täysikokoinen ({p["width"]}×{p["height"]})</a>')
+    return f'<div class="photo-meta">{" · ".join(bits)}</div>' if bits else ""
+
+
+def thumb_link(p: dict, base: str) -> str:
+    cap = htmlmod.escape(p.get("caption") or "")
+    cls = "thumb-link is-video" if p.get("type") == "video" else "thumb-link"
+    return (f'<a href="{p["id"]}.html" class="{cls}">'
+            f'<img src="{base}{p["thumb"]}" loading="lazy" alt="{cap}" title="{cap}"></a>')
+
+
+def photo_grid_by_day(photos: list[dict], base: str, titles: dict, diary_href) -> str:
+    """Thumbnail grid grouped under one heading per diary day."""
+    groups: dict = {}
+    for p in photos:
+        groups.setdefault(p.get("date"), []).append(p)
+    out = []
+    for date, items in groups.items():
+        thumbs = "\n".join(thumb_link(p, base) for p in items)
+        if date:
+            head = (f'<div class="photo-day-title"><a href="{diary_href(date)}">'
+                    f'{htmlmod.escape(titles.get(date, date))}</a>'
+                    f' <span class="photo-day-count">{len(items)}</span></div>')
+        else:
+            head = ""
+        out.append(f'<div class="photo-day" id="d{date or "x"}">{head}<div class="photo-grid">{thumbs}</div></div>')
+    return "\n".join(out)
+
+
+def archive_summary(photos: list[dict]) -> str:
+    n_vid = sum(p.get("type") == "video" for p in photos)
+    s = f"{len(photos) - n_vid} photos"
+    return s + (f", {n_vid} videos" if n_vid else "")
+
+
+def build_static_photos(photos: list[dict], titles: dict, media_base: str = "") -> None:
+    photos_dir = STATIC_DIR / "photos"
+    if not media_base:
+        copy_photos_to(photos_dir, photos)
+    base = media_base
+
+    for i, p in enumerate(photos):
         prev_p = photos[i - 1] if i > 0 else None
         next_p = photos[i + 1] if i < len(photos) - 1 else None
-
-        prev_btn = (f'<a href="{Path(prev_p["filename"]).stem}.html"><img src="../assets/gfx/previous-4x.gif" alt="edellinen" class="nav-arrow"></a>'
+        prev_btn = (f'<a href="{prev_p["id"]}.html"><img src="../assets/gfx/previous-4x.gif" alt="edellinen" class="nav-arrow"></a>'
                     if prev_p else '<img src="../assets/gfx/previous-4x.gif" alt="" class="nav-arrow nav-arrow-inactive">')
-        next_btn = (f'<a href="{Path(next_p["filename"]).stem}.html"><img src="../assets/gfx/next-4x.gif" alt="seuraava" class="nav-arrow"></a>'
+        next_btn = (f'<a href="{next_p["id"]}.html"><img src="../assets/gfx/next-4x.gif" alt="seuraava" class="nav-arrow"></a>'
                     if next_p else '<img src="../assets/gfx/next-4x.gif" alt="" class="nav-arrow nav-arrow-inactive">')
-
-        next_href = f"{Path(next_p['filename']).stem}.html" if next_p else "index.html"
-        img_tag   = (f'<a href="{next_href}" title="seuraava kuva" style="cursor:pointer;line-height:0;display:block;text-align:center;">'
-                     f'<img src="full/{fname}" class="photo-full" alt="{cap}"></a>')
+        next_href = f'{next_p["id"]}.html' if next_p else "index.html"
+        cap = htmlmod.escape(p.get("caption") or "")
+        date = p.get("date")
         content = f"""
     <div class="entry-nav">
       <span>{prev_btn}</span>
-      <span><a href="index.html"><img src="../assets/gfx/index_button-4x.gif" alt="kaikki kuvat" class="nav-arrow"></a></span>
+      <span><a href="index.html#d{date or 'x'}"><img src="../assets/gfx/index_button-4x.gif" alt="kaikki kuvat" class="nav-arrow"></a></span>
       <span>{next_btn}</span>
     </div>
     <div class="photo-wrap">
       <div class="photo-number">{i + 1} / {len(photos)}</div>
-      {img_tag}
+      {media_tag(p, base, next_href)}
       {f'<div class="photo-caption">{cap}</div>' if cap else ''}
-    </div>
-    <script>
-    document.addEventListener('keydown', function(e) {{
-      if (e.key === 'ArrowLeft') {{ var a = document.querySelector('.entry-nav span:first-child a'); if (a) location.href = a.href; }}
-      else if (e.key === 'ArrowRight') {{ var a = document.querySelector('.entry-nav span:last-child a'); if (a) location.href = a.href; }}
-    }});
-    </script>"""
-        write(photos_dir / f"{stem}.html", page_shell(fname, content, root="../"))
+      {media_meta(p, base, f"../{date}.html", titles.get(date, ""))}
+    </div>"""
+        write(photos_dir / f"{p['id']}.html", page_shell(p["id"], content, root="../"))
 
-    # Gallery index — thumbnail grid
-    thumbs_html = "\n".join(
-        f'<a href="{Path(p["filename"]).stem}.html" class="thumb-link">'
-        f'<img src="thumbnails/{p["filename"]}" loading="lazy" '
-        f'alt="{htmlmod.escape(p.get("caption") or "")}" '
-        f'title="{htmlmod.escape(p.get("caption") or "")}"></a>'
-        for p in photos
-    )
+    grid = photo_grid_by_day(photos, base, titles, lambda d: f"../{d}.html")
     content = f"""
     <div class="entry-wrap">
-      <div class="entry-date">Photo archive — {len(photos)} photos</div>
+      <div class="entry-date">Photo archive — {archive_summary(photos)}</div>
     </div>
-    <div class="photo-grid">
-      {thumbs_html}
-    </div>"""
+    {grid}"""
     write(photos_dir / "index.html", page_shell("photoarchive", content, root="../"))
     print(f"dist/static/photos/  — {len(photos)} photo pages + grid")
 
@@ -535,7 +618,17 @@ footer { max-width: var(--max-w); margin: 0 auto; padding: 0 24px 12px; }
 .thumb-link img { width: 90px; height: 68px; object-fit: cover; border: 1px solid var(--border); display: block; transition: opacity 0.15s; }
 .thumb-link img:hover { opacity: 0.75; }
 .photo-wrap { padding: 0 0 20px; text-align: center; }
-.photo-wrap img.photo-full { max-width: 100%; border: 1px solid var(--border); display: block; margin: 0 auto; }
+.photo-wrap img.photo-full { max-width: 100%; height: auto; border: 1px solid var(--border); display: block; margin: 0 auto; }
+.photo-link { line-height: 0; display: block; text-align: center; cursor: pointer; }
+video.photo-full { display: block; width: 100%; max-width: 720px; height: auto; margin: 0 auto; border: 1px solid var(--border); background: #000; }
+.photo-meta { font-family: sans-serif; font-size: 12px; color: var(--muted); margin-top: 6px; }
+.photo-meta a { color: inherit; }
+.photo-day-title { font-size: 15px; border-bottom: 1px solid var(--border); padding: 18px 0 4px; }
+.photo-day-title a { color: var(--accent); text-decoration: none; }
+.photo-day-count { font-family: sans-serif; font-size: 12px; color: var(--muted); }
+.photo-day .photo-grid { padding: 10px 0 4px; }
+.thumb-link { position: relative; line-height: 0; }
+.thumb-link.is-video::after { content: "▶"; position: absolute; right: 4px; bottom: 4px; font-size: 12px; line-height: 1; color: #fff; text-shadow: 0 0 3px #000; }
 .photo-caption { font-size: 14px; color: var(--muted); margin-top: 10px; font-style: italic; }
 .photo-number { font-family: sans-serif; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
 .photo-page-title { font-size: 18px; font-weight: normal; font-style: italic; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 20px; }
@@ -841,36 +934,33 @@ def dyn_photo_shell(title: str, content: str) -> str:
 </html>"""
 
 
-def build_dynamic_photos(photos: list[dict]) -> None:
+def build_dynamic_photos(photos: list[dict], titles: dict, media_base: str = "") -> None:
     photos_dir = DYNAMIC_DIR / "photos"
-    copy_photos_to(photos_dir)
+    if not media_base:
+        copy_photos_to(photos_dir, photos)
+    base = media_base
 
-    # Individual photo pages
-    for i, photo in enumerate(photos):
-        fname  = photo["filename"]
-        stem   = Path(fname).stem
-        cap    = htmlmod.escape(photo.get("caption") or "")
+    for i, p in enumerate(photos):
         prev_p = photos[i - 1] if i > 0 else None
         next_p = photos[i + 1] if i < len(photos) - 1 else None
-
-        prev_btn_dyn = (f'<a href="{Path(prev_p["filename"]).stem}.html"><img src="../assets/gfx/previous-4x.gif" class="nav-arrow" alt="edellinen"></a>'
-                        if prev_p else '<img src="../assets/gfx/previous-4x.gif" class="nav-arrow nav-arrow-inactive" alt="">')
-        next_btn_dyn = (f'<a href="{Path(next_p["filename"]).stem}.html"><img src="../assets/gfx/next-4x.gif" class="nav-arrow" alt="seuraava"></a>'
-                        if next_p else '<img src="../assets/gfx/next-4x.gif" class="nav-arrow nav-arrow-inactive" alt="">')
-
-        dyn_next_href = f"{Path(next_p['filename']).stem}.html" if next_p else "index.html"
-        dyn_img_tag   = (f'<a href="{dyn_next_href}" title="seuraava kuva" style="cursor:pointer;line-height:0;display:block;text-align:center;">'
-                         f'<img src="full/{fname}" class="photo-full" alt="{cap}"></a>')
+        prev_btn = (f'<a href="{prev_p["id"]}.html"><img src="../assets/gfx/previous-4x.gif" class="nav-arrow" alt="edellinen"></a>'
+                    if prev_p else '<img src="../assets/gfx/previous-4x.gif" class="nav-arrow nav-arrow-inactive" alt="">')
+        next_btn = (f'<a href="{next_p["id"]}.html"><img src="../assets/gfx/next-4x.gif" class="nav-arrow" alt="seuraava"></a>'
+                    if next_p else '<img src="../assets/gfx/next-4x.gif" class="nav-arrow nav-arrow-inactive" alt="">')
+        next_href = f'{next_p["id"]}.html' if next_p else "index.html"
+        cap = htmlmod.escape(p.get("caption") or "")
+        date = p.get("date")
         content = f"""
     <div id="entry-nav">
-      <span>{prev_btn_dyn}</span>
-      <span><a href="index.html"><img src="../assets/gfx/index_button-4x.gif" class="nav-arrow" alt="kaikki kuvat"></a></span>
-      <span>{next_btn_dyn}</span>
+      <span>{prev_btn}</span>
+      <span><a href="index.html#d{date or 'x'}"><img src="../assets/gfx/index_button-4x.gif" class="nav-arrow" alt="kaikki kuvat"></a></span>
+      <span>{next_btn}</span>
     </div>
     <p class="photo-number">{i + 1} / {len(photos)}</p>
     <div class="photo-wrap">
-      {dyn_img_tag}
+      {media_tag(p, base, next_href)}
       {f'<p class="photo-caption">{cap}</p>' if cap else ''}
+      {media_meta(p, base, f"../index.html#{date}", titles.get(date, ""))}
     </div>
     <script>
     document.addEventListener('keydown', function(e) {{
@@ -880,56 +970,14 @@ def build_dynamic_photos(photos: list[dict]) -> None:
       else if (e.key === 'ArrowRight') {{ var a = spans[spans.length-1].querySelector('a'); if (a) location.href = a.href; }}
     }});
     </script>"""
-        write(photos_dir / f"{stem}.html", dyn_photo_shell(fname, content))
+        write(photos_dir / f"{p['id']}.html", dyn_photo_shell(p["id"], content))
 
-    # Gallery index
-    thumbs_html = "\n".join(
-        f'<a href="{Path(p["filename"]).stem}.html" class="thumb-link">'
-        f'<img src="thumbnails/{p["filename"]}" loading="lazy" '
-        f'alt="{htmlmod.escape(p.get("caption") or "")}" '
-        f'title="{htmlmod.escape(p.get("caption") or "")}"></a>'
-        for p in photos
-    )
-
-    # dyn_photo_shell uses ../assets/style.css, but the index is itself in photos/
+    grid = photo_grid_by_day(photos, base, titles, lambda d: f"../index.html#{d}")
     index_content = f"""
-    <h2 class="photo-page-title">Photo archive — {len(photos)} photos</h2>
-    <div class="photo-grid">
-      {thumbs_html}
-    </div>"""
-
-    # Need a special shell for photos/index.html since nav self-link is 'index.html'
-    index_html = f"""<!DOCTYPE html>
-<html lang="fi">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>photoarchive — chinese people...</title>
-  <link rel="stylesheet" href="../assets/style.css">
-</head>
-<body>
-  <div class="site-frame">
-    <img src="../assets/gfx/hero.gif" alt="chinese people..." class="hero-img">
-    <nav>
-      <div class="nav-inner">
-        <a href="../index.html"><img src="../assets/gfx/diary-4x.gif" alt="the diary" class="nav-btn"></a>
-        <a href="index.html"><img src="../assets/gfx/photoarchive-4x.gif" alt="photoarchive" class="nav-btn"></a>
-        <a href="../practical.html"><img src="../assets/gfx/practical_chinese-4x.gif" alt="practical chinese" class="nav-btn"></a>
-      </div>
-    </nav>
-  </div>
-  <main>
-    {index_content}
-  </main>
-  <footer>
-    <div class="footer-inner">
-      <img src="../assets/gfx/kumiankka_china_logo_vaaka.gif" alt="kumiankka.org" class="footer-logo">
-      <span class="footer-copy">© kumiankka.org 2001 – Remastered 2026</span>
-    </div>
-  </footer>
-</body>
-</html>"""
-    write(photos_dir / "index.html", index_html)
+    <h2 class="photo-page-title">Photo archive — {archive_summary(photos)}</h2>
+    {grid}"""
+    # dyn_photo_shell already links the photoarchive nav button to index.html (this page)
+    write(photos_dir / "index.html", dyn_photo_shell("photoarchive", index_content))
     print(f"dist/dynamic/photos/ — {len(photos)} photo pages + grid")
 
 
@@ -957,13 +1005,13 @@ def main() -> None:
     print("  China Diary — Build")
     print("=" * 45 + "\n")
 
-    entries = build_data()
     photos  = load_photos()
-    print(f"photos/ — {len(photos)} photos loaded")
+    entries = build_data(photos)
+    titles  = {e["date"]: e["title"] for e in entries}
     build_static(entries, photos)
-    build_static_photos(photos)
+    build_static_photos(photos, titles)
     build_dynamic(entries, photos)
-    build_dynamic_photos(photos)
+    build_dynamic_photos(photos, titles, DYNAMIC_MEDIA_BASE)
     build_practical()
 
     print(f"""

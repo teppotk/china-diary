@@ -5,7 +5,8 @@ __pycache__/
 .DS_Store
 
 # Photos are tracked once in content/; skip generated copies in dist/
-dist/static/photos/full/
-dist/static/photos/thumbnails/
-dist/dynamic/photos/full/
-dist/dynamic/photos/thumbnails/
+dist/static/photos/*/
+dist/dynamic/photos/*/
+
+# Camera originals (1.2 GB, q97) — archived in Dropbox, processed into content/photos/highres/
+content/photos/highres_originals/

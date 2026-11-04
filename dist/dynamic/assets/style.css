@@ -88,7 +88,17 @@ footer { max-width: var(--max-w); margin: 0 auto; padding: 0 24px 12px; }
 .thumb-link img { width: 90px; height: 68px; object-fit: cover; border: 1px solid var(--border); display: block; transition: opacity 0.15s; }
 .thumb-link img:hover { opacity: 0.75; }
 .photo-wrap { padding: 0 0 20px; text-align: center; }
-.photo-wrap img.photo-full { max-width: 100%; border: 1px solid var(--border); display: block; margin: 0 auto; }
+.photo-wrap img.photo-full { max-width: 100%; height: auto; border: 1px solid var(--border); display: block; margin: 0 auto; }
+.photo-link { line-height: 0; display: block; text-align: center; cursor: pointer; }
+video.photo-full { display: block; width: 100%; max-width: 720px; height: auto; margin: 0 auto; border: 1px solid var(--border); background: #000; }
+.photo-meta { font-family: sans-serif; font-size: 12px; color: var(--muted); margin-top: 6px; }
+.photo-meta a { color: inherit; }
+.photo-day-title { font-size: 15px; border-bottom: 1px solid var(--border); padding: 18px 0 4px; }
+.photo-day-title a { color: var(--accent); text-decoration: none; }
+.photo-day-count { font-family: sans-serif; font-size: 12px; color: var(--muted); }
+.photo-day .photo-grid { padding: 10px 0 4px; }
+.thumb-link { position: relative; line-height: 0; }
+.thumb-link.is-video::after { content: "▶"; position: absolute; right: 4px; bottom: 4px; font-size: 12px; line-height: 1; color: #fff; text-shadow: 0 0 3px #000; }
 .photo-caption { font-size: 14px; color: var(--muted); margin-top: 10px; font-style: italic; }
 .photo-number { font-family: sans-serif; font-size: 12px; color: var(--muted); margin-bottom: 8px; }
 .photo-page-title { font-size: 18px; font-weight: normal; font-style: italic; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 20px; }

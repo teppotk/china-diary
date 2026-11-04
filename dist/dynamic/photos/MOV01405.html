@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MOV01405 — chinese people...</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <div class="site-frame">
+    <img src="../assets/gfx/hero.gif" alt="chinese people..." class="hero-img">
+    <nav>
+      <div class="nav-inner">
+        <a href="../index.html"><img src="../assets/gfx/diary-4x.gif" alt="the diary" class="nav-btn"></a>
+        <a href="index.html"><img src="../assets/gfx/photoarchive-4x.gif" alt="photoarchive" class="nav-btn"></a>
+        <a href="../practical.html"><img src="../assets/gfx/practical_chinese-4x.gif" alt="practical chinese" class="nav-btn"></a>
+      </div>
+    </nav>
+  </div>
+  <main>
+    
+    <div id="entry-nav">
+      <span><a href="DSC01404.html"><img src="../assets/gfx/previous-4x.gif" class="nav-arrow" alt="edellinen"></a></span>
+      <span><a href="index.html#d2001-03-19"><img src="../assets/gfx/index_button-4x.gif" class="nav-arrow" alt="kaikki kuvat"></a></span>
+      <span><a href="DSC01406.html"><img src="../assets/gfx/next-4x.gif" class="nav-arrow" alt="seuraava"></a></span>
+    </div>
+    <p class="photo-number">164 / 1201</p>
+    <div class="photo-wrap">
+      <video class="photo-full photo-video" controls preload="none" playsinline poster="highres/MOV01405.jpg"><source src="highres/MOV01405.mp4" type="video/mp4"><a href="highres/MOV01405.mp4">Lataa video</a></video>
+      
+      <div class="photo-meta"><a href="../index.html#2001-03-19">19.03.2001 Maanantai</a> · klo 18.15 · video 15 s</div>
+    </div>
+    <script>
+    document.addEventListener('keydown', function(e) {
+      var spans = document.querySelectorAll('#entry-nav > span');
+      if (!spans.length) return;
+      if (e.key === 'ArrowLeft') { var a = spans[0].querySelector('a'); if (a) location.href = a.href; }
+      else if (e.key === 'ArrowRight') { var a = spans[spans.length-1].querySelector('a'); if (a) location.href = a.href; }
+    });
+    </script>
+  </main>
+  <footer>
+    <div class="footer-inner">
+      <img src="../assets/gfx/kumiankka_china_logo_vaaka.gif" alt="kumiankka.org" class="footer-logo">
+      <span class="footer-copy">© kumiankka.org 2001 – Remastered 2026</span>
+    </div>
+  </footer>
+</body>
+</html>
